@@ -22,7 +22,7 @@ resource natGateway 'Microsoft.Network/natGateways@2022-01-01' = {
   }
 }
 
-resource vnet 'Microsoft.Network/virtualNetworks/subnets@2022-01-01' = {
+resource natGatewaySubnet 'Microsoft.Network/virtualNetworks/subnets@2022-01-01' = {
   name: virtualNetworkSubnetName
   parent: virtualNetwork
   properties: {
