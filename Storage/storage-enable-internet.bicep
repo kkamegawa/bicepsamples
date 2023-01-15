@@ -28,7 +28,7 @@ var containers =[
   }
 ]
 
-resource storageContainer 'Microsoft.Storage/storageAccounts/blobServices/containers@2021-09-01' = [for container in containers: {
+resource storageContainer 'Microsoft.Storage/storageAccounts/blobServices/containers@2022-05-01' = [for container in containers: {
   name: container.name
   parent: storageBlobService
   properties: {
@@ -36,7 +36,7 @@ resource storageContainer 'Microsoft.Storage/storageAccounts/blobServices/contai
   }
 }]
 
-resource storageBlobService 'Microsoft.Storage/storageAccounts/blobServices@2021-09-01' = {
+resource storageBlobService 'Microsoft.Storage/storageAccounts/blobServices@2022-05-01' = {
   name: 'default'
   parent: strorageAccount
   properties: {
@@ -58,7 +58,7 @@ resource storageBlobService 'Microsoft.Storage/storageAccounts/blobServices@2021
   }
 }
 
-resource strorageAccount 'Microsoft.Storage/storageAccounts@2021-09-01' = {
+resource strorageAccount 'Microsoft.Storage/storageAccounts@2022-05-01' = {
   name: storageName
   location: location
   sku: {
