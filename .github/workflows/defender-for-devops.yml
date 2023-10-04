@@ -36,5 +36,13 @@ jobs:
     - name: security-devops-action
       uses: microsoft/security-devops-action@v1.7.2
       with:
-        # A file path to a .gdnconfig file.
-        policy: IaC
+        # The name of the well known policy to use. Defaults to GitHub.
+        policy: GitHub
+        # A comma separated list of analyzer categories to run. Values secrets, code, artifacts, IaC, containers. Example IaC,secrets. Defaults to all.
+        categories: IaC 
+        # A comma separated list of languages to analyze. Example javascript, typescript. Defaults to all.
+    - name: Upload alerts to Security tab
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: ${{ steps.msdo.outputs.sarifFile }}
+
