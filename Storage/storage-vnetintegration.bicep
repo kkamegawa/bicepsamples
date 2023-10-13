@@ -21,13 +21,13 @@ module vnetBase '../Modules/Shared-vnet.bicep' ={
   }
 }
 
-resource virtualNetwork 'Microsoft.Network/virtualNetworks@2022-01-01' existing = {
+resource virtualNetwork 'Microsoft.Network/virtualNetworks@2023-05-01' existing = {
   name: vnetName
 }
 
 var storageSubnetId = resourceId('Microsoft.Network/VirtualNetworks/subnets', vnetName, 'storage')
 
-resource privateBlobContainer 'Microsoft.Storage/storageAccounts/blobServices/containers@2022-05-01' = {
+resource privateBlobContainer 'Microsoft.Storage/storageAccounts/blobServices/containers@2023-01-01' = {
   name: 'privateContainer'
   parent: privateBlob
   properties: {
@@ -42,7 +42,7 @@ resource privateBlobContainer 'Microsoft.Storage/storageAccounts/blobServices/co
   }
 }
 
-resource privateEndpointforStorage 'Microsoft.Network/privateEndpoints@2022-01-01' = {
+resource privateEndpointforStorage 'Microsoft.Network/privateEndpoints@2023-05-01' = {
   name: 'private-endpoint-${storageName}'
   properties: {
     customDnsConfigs: [
@@ -106,7 +106,7 @@ resource privateEndpointforStorage 'Microsoft.Network/privateEndpoints@2022-01-0
   }
 }
 
-resource privateBlob 'Microsoft.Storage/storageAccounts/blobServices@2022-05-01' = {
+resource privateBlob 'Microsoft.Storage/storageAccounts/blobServices@2023-01-01' = {
   name: 'default'
   parent: vnetIntegrationStorage
   properties: {
@@ -138,7 +138,7 @@ resource privateBlob 'Microsoft.Storage/storageAccounts/blobServices@2022-05-01'
   }
 }
 
-resource privateStorageEndpoint 'Microsoft.Storage/storageAccounts/privateEndpointConnections@2022-05-01' = {
+resource privateStorageEndpoint 'Microsoft.Storage/storageAccounts/privateEndpointConnections@2023-01-01' = {
   name: 'private-endpoint-${storageName}'
   parent: vnetIntegrationStorage
   properties: {
@@ -150,7 +150,7 @@ resource privateStorageEndpoint 'Microsoft.Storage/storageAccounts/privateEndpoi
   }
 }
 
-resource vnetIntegrationStorage 'Microsoft.Storage/storageAccounts@2022-05-01' = {
+resource vnetIntegrationStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = {
   name: storageName
   location: location
   dependsOn: [

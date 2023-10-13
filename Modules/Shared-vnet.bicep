@@ -22,7 +22,7 @@ var subnets = [
   }
 ]
 
-resource vnetsubnet 'Microsoft.Network/virtualNetworks/subnets@2022-01-01' = [for (subnet, i) in subnets : {
+resource vnetsubnet 'Microsoft.Network/virtualNetworks/subnets@2023-05-01' = [for (subnet, i) in subnets : {
   name: subnet.name
   parent: virtualNetwork
   properties: {
@@ -30,7 +30,7 @@ resource vnetsubnet 'Microsoft.Network/virtualNetworks/subnets@2022-01-01' = [fo
   }
 }]
 
-resource virtualNetwork 'Microsoft.Network/virtualNetworks@2022-01-01' = {
+resource virtualNetwork 'Microsoft.Network/virtualNetworks@2023-05-01' = {
   name: vnetName
   location: location
   properties: {

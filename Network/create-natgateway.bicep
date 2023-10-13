@@ -6,13 +6,13 @@ param virtualNetworkName string = 'vnet-base'
 param virtualNetworkSubnetName string = 'PublicSubnet'
 param virtualNetworkSubnetAddressPrefix string = '10.0.0.0/24'
 
-resource virtualNetwork 'Microsoft.Network/virtualNetworks@2022-01-01' existing = {
+resource virtualNetwork 'Microsoft.Network/virtualNetworks@2023-05-01' existing = {
   name: virtualNetworkName
 }
 
 output virtualNetwork string = virtualNetwork.id
 
-resource natGateway 'Microsoft.Network/natGateways@2022-01-01' = {
+resource natGateway 'Microsoft.Network/natGateways@2023-05-01' = {
   name: natGatewayName
   location: location
   sku: {
@@ -28,7 +28,7 @@ resource natGateway 'Microsoft.Network/natGateways@2022-01-01' = {
   }
 }
 
-resource publicip 'Microsoft.Network/publicIPAddresses@2022-01-01' = {
+resource publicip 'Microsoft.Network/publicIPAddresses@2023-05-01' = {
   name: publicIPName
   location: location
   sku: {
@@ -41,7 +41,7 @@ resource publicip 'Microsoft.Network/publicIPAddresses@2022-01-01' = {
   }
 }
 
-resource vnet 'Microsoft.Network/virtualNetworks/subnets@2022-01-01' = {
+resource vnet 'Microsoft.Network/virtualNetworks/subnets@2023-05-01' = {
   name: virtualNetworkSubnetName
   parent: virtualNetwork
   properties: {

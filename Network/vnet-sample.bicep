@@ -43,7 +43,7 @@ var nsgGroups = [
   }
 ]
 
-resource nsgforSubnet 'Microsoft.Network/networkSecurityGroups@2021-08-01' = {
+resource nsgforSubnet 'Microsoft.Network/networkSecurityGroups@2023-05-01' = {
   name: 'subnetNetworkSecurity'
   location: location
   properties: {
@@ -66,7 +66,7 @@ resource nsgforSubnet 'Microsoft.Network/networkSecurityGroups@2021-08-01' = {
 
 var nsgGroupID = nsgforSubnet.id
 
-resource vnetsubnet 'Microsoft.Network/virtualNetworks/subnets@2021-08-01' = [for (subnet, i) in subnets : {
+resource vnetsubnet 'Microsoft.Network/virtualNetworks/subnets@2023-05-01' = [for (subnet, i) in subnets : {
   name: subnet.name
   parent: virtualNetwork
   properties: {
@@ -77,7 +77,7 @@ resource vnetsubnet 'Microsoft.Network/virtualNetworks/subnets@2021-08-01' = [fo
   }
 }]
 
-resource virtualNetwork 'Microsoft.Network/virtualNetworks@2021-08-01' = {
+resource virtualNetwork 'Microsoft.Network/virtualNetworks@2023-05-01' = {
   name: vnetName
   location: location
   properties: {
