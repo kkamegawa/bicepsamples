@@ -36,7 +36,19 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
     name: storageAccountType
   }
   properties: {
+    largeFileSharesState: 'Disabled'
     accessTier: 'Hot'
+    allowBlobPublicAccess: true
+    allowSharedKeyAccess: true
+    minimumTlsVersion: 'TLS1_2'
+    publicNetworkAccess: 'Enabled'
+    supportsHttpsTrafficOnly: true
+    isNfsV3Enabled: false
+    isSftpEnabled: false
+    encryption: {
+      keySource: 'Microsoft.Storage'
+      requireInfrastructureEncryption: true
+    }
   }
 }
 
