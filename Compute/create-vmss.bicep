@@ -57,9 +57,11 @@ param rollingUpgradePolicy_maxBatchInstancePercent int = 20
 param rollingUpgradePolicy_maxSurge bool = false
 param rollingUpgradePolicy_maxUnhealthyInstancePercent int = 20
 param rollingUpgradePolicy_maxUnhealthyUpgradedInstancePercent int = 20
-param rollingUpgradePolicy_pauseTimeBetweenBatches string = 'PT10S'
+param rollingUpgradePolicy_pauseTimeBetweenBatches string = 'PT90M'
 param rollingUpgradePolicy_prioritizeUnhealthyInstances bool = false
 param rollingUpgradePolicy_rollbackFailedInstancesOnPolicyBreach bool = false
+param diagnosticStorageAccountName string = 'diag${uniqueString(resourceGroup().id)}'
+param bootDiagnosticsEnabled bool = false
 
 resource symbolicname 'Microsoft.Compute/virtualMachineScaleSets@2023-03-01' = {
   name: name
@@ -134,50 +136,13 @@ resource symbolicname 'Microsoft.Compute/virtualMachineScaleSets@2023-03-01' = {
       }
       diagnosticsProfile: {
         bootDiagnostics: {
-          enabled: bool
-          storageUri: 'string'
+          enabled: bootDiagnosticsEnabled
+          storageUri: bootDiagnosticsEnabled == true ? diagnosticStorageAccountName : null
         }
       }
       evictionPolicy: 'string'
-      extensionProfile: {
-        extensions: [
-          {
-            name: 'string'
-            properties: {
-              autoUpgradeMinorVersion: bool
-              enableAutomaticUpgrade: bool
-              forceUpdateTag: 'string'
-              protectedSettings: any()
-              protectedSettingsFromKeyVault: {
-                secretUrl: 'string'
-                sourceVault: {
-                  id: 'string'
-                }
-              }
-              provisionAfterExtensions: [
-                'string'
-              ]
-              publisher: 'string'
-              settings: any()
-              suppressFailures: bool
-              type: 'string'
-              typeHandlerVersion: 'string'
-            }
-          }
-        ]
-        extensionsTimeBudget: 'string'
       }
-      hardwareProfile: {
-        vmSizeProperties: {
-          vCPUsAvailable: int
-          vCPUsPerCore: int
-        }
-      }
-      licenseType: 'string'
       networkProfile: {
-        healthProbe: {
-          id: 'string'
-        }
         networkApiVersion: '2020-11-01'
         networkInterfaceConfigurations: [
           {
