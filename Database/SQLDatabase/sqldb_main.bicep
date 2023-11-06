@@ -7,9 +7,6 @@ param serverName string = uniqueString('sql', resourceGroup().id)
 param databaseName string = 'mySampleDatabase'
 @description('The administrator username of the SQL logical server.')
 param administratorLogin string = 'sqladmin'
-@description('The administrator password of the SQL logical server.')
-@secure()
-param administratorLoginPassword string
 
 @description('The name of the user assigned identity.')
 param identityName string = uniqueString('aib-', 'sqlserver-${resourceGroup().id}')
