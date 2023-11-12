@@ -62,7 +62,7 @@ var nicName = toLower('${vmName}-nic')
 var subnetName = 'default'
 var virtualNetworkName = 'communitypublic-vnet'
 
-resource pip 'Microsoft.Network/publicIPAddresses@2022-07-01' = {
+resource pip 'Microsoft.Network/publicIPAddresses@2023-05-01' = {
   name: publicIpName
   location: location
   sku: {
@@ -77,11 +77,11 @@ resource pip 'Microsoft.Network/publicIPAddresses@2022-07-01' = {
   }
 }
 
-resource vnet 'Microsoft.Network/virtualNetworks@2022-07-01' existing = {
+resource vnet 'Microsoft.Network/virtualNetworks@2023-05-01' existing = {
   name: virtualNetworkName
 }
 
-resource nic 'Microsoft.Network/networkInterfaces@2022-07-01' = {
+resource nic 'Microsoft.Network/networkInterfaces@2023-05-01' = {
   name: nicName
   location: location
   properties: {
@@ -102,7 +102,7 @@ resource nic 'Microsoft.Network/networkInterfaces@2022-07-01' = {
   }
 }
 
-resource vm 'Microsoft.Compute/virtualMachines@2022-08-01' = {
+resource vm 'Microsoft.Compute/virtualMachines@2023-07-01' = {
   name: vmName
   location: location
   properties: {
