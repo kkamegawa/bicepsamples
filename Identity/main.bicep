@@ -1,10 +1,11 @@
 //create managed identity
 param location string = resourceGroup().location
+param networkRoleDifinitionName string = guid(subscription().subscriptionId, 'networkRoleAssignment')
 param networkRoleName string = guid(subscription().subscriptionId, 'networkRoleAssignment')
 param managedIdentityName string
 
 resource networkRoleDefinition 'Microsoft.Authorization/roleDefinitions@2022-05-01-preview' = {
-  name: networkRoleName
+  name: networkRoleDifinitionName
   properties: {
     roleName: 'Network Contributor'
     description: 'Lets you manage networks, but not access to them.'
@@ -14,7 +15,9 @@ resource networkRoleDefinition 'Microsoft.Authorization/roleDefinitions@2022-05-
     permissions: [
       {
         actions: [
-          'Microsoft.Network/*'
+          'icrosoft.Network/virtualNetworks/subnets/join/action'
+          'Microsoft.Network/virtualNetworks/subnets/serviceAssociationLinks/validate/action'
+          'Microsoft.Network/virtualNetworks/subnets/serviceAssociationLinks/write'
         ]
         notActions: []
       }
